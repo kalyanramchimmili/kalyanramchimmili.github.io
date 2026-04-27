@@ -7,7 +7,6 @@ import type * as Preset from '@docusaurus/preset-classic';
 const config: Config = {
   title: 'Kalyan Ram Chimmili',
   tagline: 'Network Engineer at IG Group',
-  favicon: 'img/favicon.svg',
 
   future: {
     v4: true,
