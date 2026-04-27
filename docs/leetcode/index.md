@@ -1,6 +1,5 @@
 ---
 title: LeetCode
-slug: /leetcode
 ---
 
 # LeetCode

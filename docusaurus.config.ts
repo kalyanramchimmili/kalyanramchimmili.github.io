@@ -72,13 +72,14 @@ const config: Config = {
     // Replace with your project's social card
     image: 'img/docusaurus-social-card.jpg',
     colorMode: {
-      respectPrefersColorScheme: true,
+      defaultMode: 'light',
+      respectPrefersColorScheme: false,
     },
     navbar: {
       title: 'Kalyan Ram Chimmili',
       items: [
-        {to: '/projects', label: 'Projects', position: 'left'},
-        {to: '/leetcode', label: 'LeetCode', position: 'left'},
+        {to: '/docs/projects', label: 'Projects', position: 'left'},
+        {to: '/docs/leetcode', label: 'LeetCode', position: 'left'},
         {to: '/blog', label: 'Blog', position: 'left'},
         {
           href: 'https://github.com/kalyanramchimmilli',

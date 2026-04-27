@@ -42,10 +42,10 @@ export default function Home(): ReactNode {
         <h2>Sections</h2>
         <ul>
           <li>
-            <Link to="/projects">Projects</Link>
+            <Link to="/docs/projects">Projects</Link>
           </li>
           <li>
-            <Link to="/leetcode">LeetCode DSA</Link>
+            <Link to="/docs/leetcode">LeetCode DSA</Link>
           </li>
           <li>
             <Link to="/blog">Journey Blog</Link>
