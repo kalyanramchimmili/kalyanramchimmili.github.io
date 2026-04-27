@@ -11,7 +11,7 @@ from google.genai import errors as genai_errors
 
 SOLUTIONS_DIR = Path("solutions")
 DOCS_DIR = Path("docs/leetcode")
-MODEL = "gemini-2.5-flash"
+MODEL = "gemini-2.5-flash-lite"
 MAX_RETRIES = 4
 
 PROMPT = """You are documenting a LeetCode solution for a personal Docusaurus portfolio.
