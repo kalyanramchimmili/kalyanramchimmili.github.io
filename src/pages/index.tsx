@@ -4,7 +4,7 @@ import Layout from '@theme/Layout';
 
 export default function Home(): ReactNode {
   return (
-    <Layout title="Home" description="Kalyan Ram Chimmili's Portfolio">
+    <Layout description="Kalyan Ram Chimmili's Portfolio">
       <main style={{maxWidth: '600px', margin: '3rem auto', padding: '0 1rem'}}>
         <div style={{textAlign: 'center', marginBottom: '2.5rem'}}>
           <img
