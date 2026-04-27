@@ -1,73 +1,174 @@
-"""Generate Markdown docs from LeetCode solutions in solutions/."""
+"""Generate Markdown docs from LeetHub-pushed solutions.
 
-import ast
+Walks <SOLUTIONS_DIR>/<NNNN>-<slug>/ folders (the layout LeetHub creates) and
+produces docs/leetcode/<NNNN>-<slug>.md. Each problem folder is expected to
+contain README.md (problem statement), NOTES.md (author's approach, optional),
+and a solution file matching the folder name (e.g. 0001-two-sum.py).
+
+Set LEETCODE_SOLUTIONS_PATH to point at a checked-out LeetHub repo; defaults to
+./solutions for local runs.
+"""
+
 import os
 import sys
+import time
 from pathlib import Path
 
-import google.generativeai as genai
+from google import genai
+from google.genai import errors as genai_errors
 
-SOLUTIONS_DIR = Path("solutions")
+SOLUTIONS_DIR = Path(os.environ.get("LEETCODE_SOLUTIONS_PATH", "solutions"))
 DOCS_DIR = Path("docs/leetcode")
+MODEL = "gemini-2.5-flash-lite"
+MAX_RETRIES = 4
+
+LANG_BY_EXT = {
+    ".py": "python",
+    ".js": "javascript",
+    ".ts": "typescript",
+    ".java": "java",
+    ".cpp": "cpp",
+    ".c": "c",
+    ".go": "go",
+    ".rs": "rust",
+    ".kt": "kotlin",
+    ".swift": "swift",
+}
 
 PROMPT = """You are documenting a LeetCode solution for a personal Docusaurus portfolio.
 
-The author wrote their approach in the module docstring and the Python code below it.
+Inputs:
+- The LeetCode problem statement (from LeetHub's README.md, may include HTML)
+- The author's notes describing their approach (may be empty)
+- The solution code
 
-Produce a clean Markdown file with:
-
-- YAML frontmatter: `title` (Title Case from filename), `tags` (array of relevant DSA categories)
-- `# Problem Name`
-- `## Approach` — rewrite the docstring more polished, keep the author's intent
-- `## Solution` — the code in a ```python fenced block
-- `## Complexity` — Time and Space, derived from the approach
-
-Return ONLY the markdown. No preamble, no wrapping code fences.
+Produce a Markdown file with this EXACT structure (note the literal `---` delimiters for the frontmatter — do NOT wrap them in a yaml code fence):
 
 ---
-Filename: {filename}
+title: Problem Name In Title Case
+tags: [Arrays, Hashing]
+---
 
-Docstring:
-{docstring}
+# Problem Name
+
+## Problem
+
+2-3 sentence paraphrase of the problem. Do NOT copy LeetCode's full text verbatim and do NOT include HTML.
+
+## Approach
+
+Polish the author's notes into clear prose, keeping their intent. If the notes are empty or trivial, write a short approach summary inferred from the code and prepend the line `_(approach inferred from code — author notes were empty)_`.
+
+## Solution
+
+```{lang}
+<the code, exactly as-is>
+```
+
+## Complexity
+
+- **Time:** O(...) — short explanation
+- **Space:** O(...) — short explanation
+
+Return ONLY the markdown content starting with `---`. No preamble, no wrapping ```markdown fences.
+
+---
+Problem slug: {slug}
+Language: {lang}
+
+Problem statement (from LeetCode):
+{readme}
+
+Author notes:
+{notes}
 
 Code:
 {code}
 """
 
 
-def extract(path: Path) -> tuple[str, str]:
-    source = path.read_text()
-    tree = ast.parse(source)
-    return ast.get_docstring(tree) or "", source
+def collect(folder: Path) -> tuple[str, str, str, str, str] | None:
+    """Return (slug, lang, readme, notes, code) or None if no solution file."""
+    slug = folder.name
+    readme_path = folder / "README.md"
+    notes_path = folder / "NOTES.md"
+    readme = readme_path.read_text() if readme_path.exists() else ""
+    notes = notes_path.read_text() if notes_path.exists() else ""
 
-
-def generate(name: str, docstring: str, code: str) -> str:
-    model = genai.GenerativeModel("gemini-2.0-flash")
-    response = model.generate_content(
-        PROMPT.format(filename=name, docstring=docstring, code=code)
+    code_file = next(
+        (folder / f"{slug}{ext}" for ext in LANG_BY_EXT if (folder / f"{slug}{ext}").exists()),
+        None,
     )
-    return response.text.strip()
+    if code_file is None:
+        for f in folder.iterdir():
+            if f.suffix in LANG_BY_EXT:
+                code_file = f
+                break
+    if code_file is None:
+        return None
+
+    return slug, LANG_BY_EXT[code_file.suffix], readme, notes, code_file.read_text()
+
+
+def generate(client: genai.Client, slug: str, lang: str, readme: str, notes: str, code: str) -> str:
+    prompt = PROMPT.format(
+        slug=slug,
+        lang=lang,
+        readme=readme or "(no README)",
+        notes=notes or "(empty)",
+        code=code,
+    )
+    for attempt in range(1, MAX_RETRIES + 1):
+        try:
+            response = client.models.generate_content(model=MODEL, contents=prompt)
+            return response.text.strip()
+        except genai_errors.APIError as e:
+            status = getattr(e, "status_code", None)
+            if status not in (429, 500, 502, 503, 504):
+                raise
+            wait = 2 ** attempt * 15
+            print(f"transient {status} (attempt {attempt}); sleeping {wait}s")
+            time.sleep(wait)
+    raise RuntimeError(f"giving up on {slug} after {MAX_RETRIES} retries")
+
+
+def is_problem_folder(p: Path) -> bool:
+    if not p.is_dir():
+        return False
+    head, _, _ = p.name.partition("-")
+    return head.isdigit() and len(head) >= 1
 
 
 def main() -> None:
     api_key = os.environ.get("GEMINI_API_KEY")
     if not api_key:
         sys.exit("GEMINI_API_KEY not set")
-    genai.configure(api_key=api_key)
+    if not SOLUTIONS_DIR.exists():
+        sys.exit(f"solutions path not found: {SOLUTIONS_DIR}")
 
+    client = genai.Client(api_key=api_key)
     DOCS_DIR.mkdir(parents=True, exist_ok=True)
     written = 0
 
-    for py in sorted(SOLUTIONS_DIR.glob("*.py")):
-        md = DOCS_DIR / f"{py.stem}.md"
-        if md.exists():
-            print(f"skip  {py.name}  (already documented)")
+    for folder in sorted(SOLUTIONS_DIR.iterdir()):
+        if not is_problem_folder(folder):
             continue
-        docstring, code = extract(py)
-        markdown = generate(py.stem, docstring, code)
-        md.write_text(markdown + "\n")
+
+        out = DOCS_DIR / f"{folder.name}.md"
+        if out.exists():
+            print(f"skip  {folder.name}  (already documented)")
+            continue
+
+        result = collect(folder)
+        if result is None:
+            print(f"skip  {folder.name}  (no solution file)")
+            continue
+
+        slug, lang, readme, notes, code = result
+        markdown = generate(client, slug, lang, readme, notes, code)
+        out.write_text(markdown + "\n")
         written += 1
-        print(f"wrote {md}")
+        print(f"wrote {out}")
 
     print(f"\n{written} new file(s) generated")
 
