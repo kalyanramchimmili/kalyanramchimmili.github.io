@@ -1,1 +1,7 @@
-# DSA problem write-ups, auto-generated from my LeetHub-pushed solutions.
+---
+title: Leetcode
+---
+
+# Leetcode
+
+- DSA problem write-ups, auto-generated from my LeetHub-pushed solutions.
