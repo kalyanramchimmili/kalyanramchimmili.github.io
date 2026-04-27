@@ -58,7 +58,7 @@ export default function Home(): ReactNode {
             <a href="mailto:kalyanram.chimmili@gmail.com">Email</a>
           </li>
           <li>
-            <a href="https://github.com/kalyanramchimmilli">GitHub</a>
+            <a href="https://github.com/kalyanramchimmili">GitHub</a>
           </li>
           <li>
             <a href="https://www.linkedin.com/in/kalyanramch/">LinkedIn</a>

@@ -13,11 +13,11 @@ const config: Config = {
     v4: true,
   },
 
-  url: 'https://kalyanramchimmilli.github.io',
+  url: 'https://kalyanramchimmili.github.io',
   baseUrl: '/',
 
-  organizationName: 'kalyanramchimmilli',
-  projectName: 'kalyanramchimmilli.github.io',
+  organizationName: 'kalyanramchimmili',
+  projectName: 'kalyanramchimmili.github.io',
   deploymentBranch: 'gh-pages',
   trailingSlash: false,
 
@@ -78,7 +78,7 @@ const config: Config = {
         {to: '/docs/leetcode', label: 'LeetCode', position: 'left'},
         {to: '/blog', label: 'Blog', position: 'left'},
         {
-          href: 'https://github.com/kalyanramchimmilli',
+          href: 'https://github.com/kalyanramchimmili',
           label: 'GitHub',
           position: 'right',
         },
