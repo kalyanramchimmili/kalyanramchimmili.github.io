@@ -51,11 +51,12 @@ def generate(client: genai.Client, name: str, docstring: str, code: str) -> str:
         try:
             response = client.models.generate_content(model=MODEL, contents=prompt)
             return response.text.strip()
-        except genai_errors.ClientError as e:
-            if getattr(e, "status_code", None) != 429:
+        except genai_errors.APIError as e:
+            status = getattr(e, "status_code", None)
+            if status not in (429, 500, 502, 503, 504):
                 raise
             wait = 2 ** attempt * 15
-            print(f"rate-limited (attempt {attempt}); sleeping {wait}s")
+            print(f"transient {status} (attempt {attempt}); sleeping {wait}s")
             time.sleep(wait)
     raise RuntimeError(f"giving up on {name} after {MAX_RETRIES} retries")
 
