@@ -4,4 +4,4 @@ title: Projects
 
 # Projects
 
-Write-ups coming soon.
+- A breif explanation of the projects I have worked on
