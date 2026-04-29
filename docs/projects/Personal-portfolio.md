@@ -20,12 +20,12 @@ The homepage is intentionally simple. I'll add to it as the site grows.
 
 The dev community pointed me to [LeetHub](https://github.com/arunbhardwaj/LeetHub-2.0), a Chrome extension that auto-pushes accepted submissions to GitHub. That handled the "get code into a repo" part. The rest I automated:
 
-1. **Solve a problem on LeetCode.** I write my approach in the **Notes** tab on the problem page before submitting.
-2. **LeetHub pushes** the solution + problem README + my notes to a separate `kalyanramchimmili/leetcode` repo (per-problem folders like `0001-two-sum/`).
+1. **Solve a problem on LeetCode.** I write my approach as a Python module docstring at the top of the solution, in my own words.
+2. **LeetHub pushes** the solution + problem README to a separate `kalyanramchimmili/leetcode` repo (per-problem folders like `0001-two-sum/`).
 3. **I trigger the `Generate LeetCode Docs` GitHub Action manually** on this portfolio repo. Manual on purpose — running it on every push would burn through the free-tier Gemini quota for the day.
 4. **The workflow** checks out the LeetHub repo, runs a Python script that:
    - Skips problems already documented (idempotent)
-   - For new ones, sends the README + my Notes + the solution code to the Gemini free tier (`gemini-2.5-flash-lite`)
+   - For new ones, extracts the module docstring and sends README + docstring + the solution code to the Gemini free tier (`gemini-2.5-flash-lite`)
    - Gets back a Docusaurus-friendly markdown file with frontmatter, problem summary, polished approach, code, and complexity analysis
 5. **A pull request opens** on the portfolio repo with the generated markdown under `docs/leetcode/`.
 6. **I review it** (especially the complexity claims — Gemini sometimes hand-waves), edit if needed, and merge.
@@ -45,4 +45,4 @@ The whole loop, from "I just solved a problem" to "it's live on my site", is one
 
 - Free-tier APIs are good enough for personal use cases as long as you batch and cache. Manual dispatch + idempotent skipping was the cheap-but-correct trade-off.
 - The hardest part wasn't the AI bit — it was the architecture decision to keep raw solutions in a separate repo so the portfolio repo doesn't get cluttered with `0001-two-sum/`, `0002-…/` folders at the root.
-- Writing my own Notes before submitting is the small habit that makes the AI-generated writeups actually mine. If I skip the Notes tab, the script flags the page as "approach inferred from code" so I can spot it.
+- Writing the docstring before submitting is the small habit that makes the AI-generated writeups actually mine. If I skip it, the script flags the page as "approach inferred from code" so I can spot it.

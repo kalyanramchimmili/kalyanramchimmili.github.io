@@ -2,13 +2,19 @@
 
 Walks <SOLUTIONS_DIR>/<NNNN>-<slug>/ folders (the layout LeetHub creates) and
 produces docs/leetcode/<NNNN>-<slug>.md. Each problem folder is expected to
-contain README.md (problem statement), NOTES.md (author's approach, optional),
-and a solution file matching the folder name (e.g. 0001-two-sum.py).
+contain README.md (problem statement) and a solution file matching the folder
+name (e.g. 0001-two-sum.py).
+
+Approach text is sourced from, in order of preference:
+  1. The Python module docstring at the top of the .py file (preferred)
+  2. NOTES.md, if LeetHub managed to push one
+  3. Inferred by the model from the code itself (flagged in the output)
 
 Set LEETCODE_SOLUTIONS_PATH to point at a checked-out LeetHub repo; defaults to
 ./solutions for local runs.
 """
 
+import ast
 import os
 import sys
 import time
@@ -39,7 +45,7 @@ PROMPT = """You are documenting a LeetCode solution for a personal Docusaurus po
 
 Inputs:
 - The LeetCode problem statement (from LeetHub's README.md, may include HTML)
-- The author's notes describing their approach (may be empty)
+- The author's approach notes (from a Python module docstring or NOTES.md — may be empty)
 - The solution code
 
 Produce a Markdown file with this EXACT structure (note the literal `---` delimiters for the frontmatter — do NOT wrap them in a yaml code fence):
@@ -57,12 +63,12 @@ tags: [Arrays, Hashing]
 
 ## Approach
 
-Polish the author's notes into clear prose, keeping their intent. If the notes are empty or trivial, write a short approach summary inferred from the code and prepend the line `_(approach inferred from code — author notes were empty)_`.
+Polish the author's notes into clear prose, keeping their intent and voice. Don't add details the author didn't say. If the notes are empty or trivial, write a short approach summary inferred from the code and prepend the line `_(approach inferred from code — author notes were empty)_`.
 
 ## Solution
 
 ```{lang}
-<the code, exactly as-is>
+<the code, exactly as-is — keep the docstring at the top if present>
 ```
 
 ## Complexity
@@ -87,13 +93,19 @@ Code:
 """
 
 
+def extract_python_docstring(code: str) -> str:
+    """Return the module-level docstring from Python source, or empty string."""
+    try:
+        tree = ast.parse(code)
+    except SyntaxError:
+        return ""
+    return ast.get_docstring(tree) or ""
+
+
 def collect(folder: Path) -> tuple[str, str, str, str, str] | None:
     """Return (slug, lang, readme, notes, code) or None if no solution file."""
     slug = folder.name
-    readme_path = folder / "README.md"
-    notes_path = folder / "NOTES.md"
-    readme = readme_path.read_text() if readme_path.exists() else ""
-    notes = notes_path.read_text() if notes_path.exists() else ""
+    readme = (folder / "README.md").read_text() if (folder / "README.md").exists() else ""
 
     code_file = next(
         (folder / f"{slug}{ext}" for ext in LANG_BY_EXT if (folder / f"{slug}{ext}").exists()),
@@ -107,7 +119,17 @@ def collect(folder: Path) -> tuple[str, str, str, str, str] | None:
     if code_file is None:
         return None
 
-    return slug, LANG_BY_EXT[code_file.suffix], readme, notes, code_file.read_text()
+    code = code_file.read_text()
+    lang = LANG_BY_EXT[code_file.suffix]
+
+    # Approach source preference: Python docstring → NOTES.md → empty
+    notes = ""
+    if lang == "python":
+        notes = extract_python_docstring(code)
+    if not notes and (folder / "NOTES.md").exists():
+        notes = (folder / "NOTES.md").read_text()
+
+    return slug, lang, readme, notes, code
 
 
 def generate(client: genai.Client, slug: str, lang: str, readme: str, notes: str, code: str) -> str:
@@ -165,6 +187,8 @@ def main() -> None:
             continue
 
         slug, lang, readme, notes, code = result
+        source = "docstring" if lang == "python" and notes else ("NOTES.md" if notes else "(none — will infer)")
+        print(f"gen   {folder.name}  (approach source: {source})")
         markdown = generate(client, slug, lang, readme, notes, code)
         out.write_text(markdown + "\n")
         written += 1
