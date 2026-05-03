@@ -37,7 +37,7 @@ The UI was done by Claude. I am not a frontend person. My contributions were mos
 
 - **Embeddings.** Implementing it was a good exercise to see how it runs.
 - **RAG.** The major part of RAG is the retrieval part. A few people argue RAG is dead now that the new models' context window is 1M, but RAG shines on repeated queries — loading a 1000-page PDF every time into an LLM would degrade its quality so badly it would start answering completely unrelated stuff. Happened to me with ChatGPT.
-- **ChromaDB.** The sheer algorithm of how RAG works was pretty simple. Heard Postgres too supports vector databases — these could be the next core skill everyone would run behind as AI grows more and more.
+- **ChromaDB.** The sheer algorithm of how RAG works was pretty simple. Heard Postgres too supports vector databases, would like to try that out.
 - **Local-first is real.** Once the model and embeddings are in RAM, the only slow part is the first chunk-and-embed pass on a fresh PDF, and that's a one-time cost per document — but hey, everything works.
 
 Along with this, I wanted to learn how to build Docker images. I'd worked with Docker before but never shipped any images, so I learned how to write a Dockerfile and build one. Tbh the performance of Docker on my 8 GB MacBook Air was not great, which was expected, but anyway — could check off the box of shipping my first Docker image.
