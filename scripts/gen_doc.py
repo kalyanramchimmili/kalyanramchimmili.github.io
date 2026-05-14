@@ -30,15 +30,9 @@ MAX_RETRIES = 4
 
 LANG_BY_EXT = {
     ".py": "python",
-    ".js": "javascript",
-    ".ts": "typescript",
-    ".java": "java",
     ".cpp": "cpp",
     ".c": "c",
-    ".go": "go",
-    ".rs": "rust",
-    ".kt": "kotlin",
-    ".swift": "swift",
+    ".go": "go"
 }
 
 PROMPT = """You are documenting a LeetCode solution for a personal Docusaurus portfolio.
@@ -122,7 +116,6 @@ def collect(folder: Path) -> tuple[str, str, str, str, str] | None:
     code = code_file.read_text()
     lang = LANG_BY_EXT[code_file.suffix]
 
-    # Approach source preference: Python docstring → NOTES.md → empty
     notes = ""
     if lang == "python":
         notes = extract_python_docstring(code)
