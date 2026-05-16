@@ -1,5 +1,6 @@
 ---
 title: Diameter of Binary Tree
+description: "The goal is to find the length of the longest path between any two nodes in a binary tree."
 tags: [Tree, Depth-First Search, Binary Tree]
 ---
 

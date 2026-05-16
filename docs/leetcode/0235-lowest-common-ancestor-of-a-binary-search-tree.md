@@ -1,5 +1,6 @@
 ---
 title: Lowest Common Ancestor of a Binary Search Tree
+description: "Find the lowest common ancestor (LCA) of two given nodes, `p` and `q`, in a Binary Search Tree (BST)."
 tags: [Tree, Depth-First Search, Binary Search Tree, Binary Tree]
 ---
 

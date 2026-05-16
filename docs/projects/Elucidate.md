@@ -1,5 +1,6 @@
 ---
 title: Elucidate
+description: A fully local PDF Q&A application — upload a PDF, ask it questions, nothing leaves the machine.
 tags: [RAG, Flask, Ollama, ChromaDB, Python]
 ---
 

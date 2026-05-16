@@ -1,5 +1,6 @@
 ---
 title: Flood Fill
+description: "Given a 2D grid representing an image, a starting pixel's coordinates, and a new color, change the color of the starting pixel and all…"
 tags: [Depth-First Search, Breadth-First Search, Recursion, Array]
 ---
 

@@ -46,6 +46,7 @@ Produce a Markdown file with this EXACT structure (note the literal `---` delimi
 
 ---
 title: Problem Name In Title Case
+description: One sentence (under 140 chars) summarizing the problem in plain language. Used as a card preview on index pages — should read well standalone, no markdown, no trailing period required.
 tags: [Arrays, Hashing]
 ---
 

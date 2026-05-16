@@ -1,5 +1,6 @@
 ---
 title: Median of Two Sorted Arrays
+description: "Given two sorted arrays, find the median of the combined sorted array."
 tags: [Arrays, Sorting]
 ---
 

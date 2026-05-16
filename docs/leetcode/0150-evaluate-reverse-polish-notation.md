@@ -1,5 +1,6 @@
 ---
 title: Evaluate Reverse Polish Notation
+description: "Given an array of strings representing an arithmetic expression in Reverse Polish Notation (RPN), evaluate the expression and return the…"
 tags: [Arrays, Stack]
 ---
 

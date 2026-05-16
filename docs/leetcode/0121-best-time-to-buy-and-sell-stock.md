@@ -1,5 +1,6 @@
 ---
 title: Best Time to Buy and Sell Stock
+description: "Given an array of stock prices for consecutive days, find the maximum profit that can be achieved by buying on one day and selling on a…"
 tags: [Arrays, Hashing]
 ---
 

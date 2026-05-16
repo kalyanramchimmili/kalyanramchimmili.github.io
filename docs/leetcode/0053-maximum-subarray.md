@@ -1,5 +1,6 @@
 ---
 title: Maximum Subarray
+description: "Given an array of integers, find the contiguous subarray with the largest sum and return its sum."
 tags: [Arrays, Hashing]
 ---
 

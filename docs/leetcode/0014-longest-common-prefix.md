@@ -1,5 +1,6 @@
 ---
 title: Longest Common Prefix
+description: "Given an array of strings, find the longest common prefix among them."
 tags: [Arrays, Hashing]
 ---
 

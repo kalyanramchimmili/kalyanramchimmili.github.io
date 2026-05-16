@@ -1,5 +1,6 @@
 ---
 title: K Closest Points to Origin
+description: "Given a list of 2D points and an integer k, find the k points that are closest to the origin (0,0)."
 tags: [Arrays, Hashing]
 ---
 

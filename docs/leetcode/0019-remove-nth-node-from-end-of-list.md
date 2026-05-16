@@ -1,5 +1,6 @@
 ---
 title: Remove Nth Node From End of List
+description: "Given the head of a linked list, remove the nth node from the end of the list and return its head."
 tags: [Linked List, Two Pointers]
 ---
 

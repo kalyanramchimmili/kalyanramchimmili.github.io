@@ -1,5 +1,6 @@
 ---
 title: Two Sum
+description: "Given an array of integers and a target integer, find the indices of two numbers that add up to the target."
 tags: [Arrays, Sorting, Two Pointers]
 ---
 

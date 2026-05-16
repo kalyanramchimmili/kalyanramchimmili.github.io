@@ -1,5 +1,6 @@
 ---
 title: Insert Interval
+description: "Given a sorted list of non-overlapping intervals and a new interval, insert the new interval into the list while maintaining the sorted…"
 tags: [Arrays, Hashing]
 ---
 

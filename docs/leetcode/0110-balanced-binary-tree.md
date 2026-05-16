@@ -1,5 +1,6 @@
 ---
 title: Balanced Binary Tree
+description: "Determine if a given binary tree is height-balanced, meaning the heights of the two subtrees of every node never differ by more than one."
 tags: [Tree, Depth-First Search, Recursion]
 ---
 

@@ -1,5 +1,6 @@
 ---
 title: Roman To Integer
+description: "Convert a Roman numeral string into its corresponding integer value."
 tags: [String, Hash Table, Math]
 ---
 

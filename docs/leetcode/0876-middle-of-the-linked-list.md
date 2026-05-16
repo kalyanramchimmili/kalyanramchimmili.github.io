@@ -1,5 +1,6 @@
 ---
 title: Middle of the Linked List
+description: "Given the head of a singly linked list, find and return the middle node."
 tags: [Linked List]
 ---
 

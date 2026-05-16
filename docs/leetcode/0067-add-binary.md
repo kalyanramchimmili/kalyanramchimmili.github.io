@@ -1,5 +1,6 @@
 ---
 title: Add Binary
+description: "Given two binary strings, return their sum as a new binary string."
 tags: [Strings, Math]
 ---
 

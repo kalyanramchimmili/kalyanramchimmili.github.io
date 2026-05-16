@@ -1,5 +1,6 @@
 ---
 title: Implement Queue Using Stacks
+description: "Implement a queue data structure (First-In, First-Out) using only the standard operations of two stacks."
 tags: [Stacks, Design]
 ---
 

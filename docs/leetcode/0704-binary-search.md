@@ -1,5 +1,6 @@
 ---
 title: Binary Search
+description: "Given a sorted array of integers, find the index of a given target value."
 tags: [Arrays, Binary Search]
 ---
 

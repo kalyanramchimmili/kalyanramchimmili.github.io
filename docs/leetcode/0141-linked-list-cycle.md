@@ -1,5 +1,6 @@
 ---
 title: Linked List Cycle
+description: "Given the head of a linked list, determine if there's a cycle present."
 tags: [Linked Lists, Two Pointers]
 ---
 

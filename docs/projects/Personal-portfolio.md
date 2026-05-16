@@ -1,5 +1,6 @@
 ---
 title: Personal Portfolio
+description: The site you're reading now — Docusaurus on GitHub Pages, wired so LeetCode write-ups land here automatically via LeetHub and Gemini.
 tags: [Docusaurus, GitHub Actions, Gemini, LeetHub]
 ---
 
