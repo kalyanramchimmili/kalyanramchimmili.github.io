@@ -1,5 +1,6 @@
 ---
 title: 3Sum Closest
+description: "Given an array of integers, find three distinct numbers whose sum is as close as possible to a given target value."
 tags: [Sorting, Two Pointers]
 ---
 

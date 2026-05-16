@@ -1,5 +1,6 @@
 ---
 title: Valid Anagram
+description: "Determine if one string is an anagram of another."
 tags: [Strings, Sorting, Hashing]
 ---
 

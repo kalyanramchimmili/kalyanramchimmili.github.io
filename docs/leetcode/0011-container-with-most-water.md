@@ -1,5 +1,6 @@
 ---
 title: Container With Most Water
+description: "Given an array representing the heights of vertical lines, find two lines that, along with the x-axis, form a container holding the…"
 tags: [Array, Two Pointers]
 ---
 

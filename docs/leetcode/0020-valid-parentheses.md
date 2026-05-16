@@ -1,5 +1,6 @@
 ---
 title: Valid Parentheses
+description: "Given a string containing only parentheses, determine if the brackets are correctly matched and ordered."
 tags: [Stack, String]
 ---
 

@@ -1,5 +1,6 @@
 ---
 title: Invert Binary Tree
+description: "Given the root of a binary tree, invert the tree by swapping its left and right children at each node."
 tags: [Tree, Depth-First Search, Breadth-First Search, Recursion]
 ---
 

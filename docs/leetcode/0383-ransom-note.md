@@ -1,5 +1,6 @@
 ---
 title: Ransom Note
+description: "Given two strings, `ransomNote` and `magazine`, determine if the `ransomNote` can be constructed using the letters from `magazine`."
 tags: [Strings, Hashing, Counting]
 ---
 

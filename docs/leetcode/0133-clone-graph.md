@@ -1,5 +1,6 @@
 ---
 title: Clone Graph
+description: "Given a connected undirected graph represented by a reference to one of its nodes, create a deep copy of the entire graph."
 tags: [Graphs, DFS, BFS, Hashing]
 ---
 

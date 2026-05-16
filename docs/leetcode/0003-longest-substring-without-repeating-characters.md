@@ -1,5 +1,6 @@
 ---
 title: Longest Substring Without Repeating Characters
+description: "Given a string, find the length of the longest substring that does not contain any repeating characters."
 tags: [Strings, Sliding Window, Hashing]
 ---
 

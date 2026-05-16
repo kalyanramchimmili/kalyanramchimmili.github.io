@@ -1,5 +1,6 @@
 ---
 title: Letter Combinations of a Phone Number
+description: "Given a string of digits from 2-9, generate all possible letter combinations that the digits can represent, based on a standard phone…"
 tags: [Arrays, Hashing]
 ---
 

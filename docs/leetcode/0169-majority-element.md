@@ -1,5 +1,6 @@
 ---
 title: Majority Element
+description: "Given an array of integers, find the element that appears more than half the time."
 tags: [Arrays, Hashing]
 ---
 

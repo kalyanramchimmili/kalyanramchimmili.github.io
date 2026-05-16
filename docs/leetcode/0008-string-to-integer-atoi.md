@@ -1,5 +1,6 @@
 ---
 title: String to Integer (atoi)
+description: "Implement the `myAtoi` function to convert a string to a 32-bit signed integer."
 tags: [Strings, Math]
 ---
 

@@ -1,5 +1,6 @@
 ---
 title: Maximum Depth of Binary Tree
+description: "Given the root of a binary tree, determine the maximum depth."
 tags: [Tree, Depth-First Search, Binary Tree]
 ---
 

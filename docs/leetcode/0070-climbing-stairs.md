@@ -1,5 +1,6 @@
 ---
 title: Climbing Stairs
+description: "You need to find the number of distinct ways to climb a staircase with `n` steps, given that you can take either 1 or 2 steps at a time."
 tags: [Dynamic Programming, Recursion, Memoization]
 ---
 

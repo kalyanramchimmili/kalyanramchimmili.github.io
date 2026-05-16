@@ -1,5 +1,6 @@
 ---
 title: Contains Duplicate
+description: "Given an array of integers, determine if any number appears more than once."
 tags: [Arrays, Hashing]
 ---
 

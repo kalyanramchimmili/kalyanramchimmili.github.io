@@ -1,5 +1,6 @@
 ---
 title: First Bad Version
+description: "Given the total number of versions of a product and an API that checks if a version is bad, find the first version that is bad."
 tags: [Binary Search, API]
 ---
 

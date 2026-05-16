@@ -1,5 +1,6 @@
 ---
 title: Reverse Integer
+description: "Reverse the digits of a signed 32-bit integer."
 tags: [Math, Two Pointers]
 ---
 

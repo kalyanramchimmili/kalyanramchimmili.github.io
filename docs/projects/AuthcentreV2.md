@@ -1,5 +1,6 @@
 ---
 title: AuthCentre v2
+description: A small JWT auth service in Django — access + refresh tokens, Google/GitHub OAuth, and a dev console to watch the auth flow happen.
 tags: [Django, DRF, JWT, OAuth, Python]
 ---
 

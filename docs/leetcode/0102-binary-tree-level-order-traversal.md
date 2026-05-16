@@ -1,5 +1,6 @@
 ---
 title: Binary Tree Level Order Traversal
+description: "Given the root of a binary tree, return the values of its nodes level by level, from left to right."
 tags: [Tree, BFS, Recursion]
 ---
 

@@ -1,5 +1,6 @@
 ---
 title: Reverse Linked List
+description: "Given the head of a singly linked list, reverse the list and return the head of the reversed list."
 tags: [Linked List, Iteration, Recursion]
 ---
 

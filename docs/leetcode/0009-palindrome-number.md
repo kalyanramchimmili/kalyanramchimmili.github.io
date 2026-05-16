@@ -1,5 +1,6 @@
 ---
 title: Palindrome Number
+description: "Determine if a given integer reads the same forwards and backward."
 tags: [Math]
 ---
 

@@ -1,5 +1,6 @@
 ---
 title: Add Two Numbers
+description: "Given two non-empty linked lists representing non-negative integers in reverse order, add them and return the sum as a new linked list."
 tags: [Linked Lists, Arithmetic]
 ---
 

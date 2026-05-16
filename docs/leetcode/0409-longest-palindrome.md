@@ -1,5 +1,6 @@
 ---
 title: Longest Palindrome
+description: "Given a string composed of lowercase and uppercase English letters, determine the length of the longest possible palindrome that can be…"
 tags: [Arrays, Hashing]
 ---
 

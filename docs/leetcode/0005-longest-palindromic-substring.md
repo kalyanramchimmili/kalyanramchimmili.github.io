@@ -1,5 +1,6 @@
 ---
 title: Longest Palindromic Substring
+description: "Given a string `s`, find and return the longest substring within `s` that is also a palindrome."
 tags: [Strings, Dynamic Programming, Expanding Around Center]
 ---
 

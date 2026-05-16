@@ -1,5 +1,6 @@
 ---
 title: Zigzag Conversion
+description: "Given a string and a number of rows, arrange the string in a zigzag pattern and then read it line by line to produce a new string."
 tags: [Arrays, String]
 ---
 
