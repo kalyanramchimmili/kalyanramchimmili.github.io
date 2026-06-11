@@ -55,6 +55,9 @@ export default function Home(): ReactNode {
         <h2>Links</h2>
         <ul>
           <li>
+            <a href="/resume.pdf" target="_blank" rel="noopener noreferrer">Resume</a>
+          </li>
+          <li>
             <a href="mailto:kalyanram.chimmili@gmail.com">Email</a>
           </li>
           <li>
