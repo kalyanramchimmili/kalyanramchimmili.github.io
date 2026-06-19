@@ -81,11 +81,11 @@ Phase 2 (change scheduling) and Phase 3 (the push to the firewall management pla
 
 The single highest-leverage thing this module does is the path-analysis check before the ticket. A meaningful fraction of requests turn out to be already-permitted — the developer didn't realise, traffic flows fine, no rule needed. Catching those before they reach security saves a five-day approval cycle for traffic that was never blocked in the first place. Now with firewalls out of the way, around 80% of the network team's queue is self-served — which frees us up for governance, infra-as-code, and pushing further into self-healing architecture. Or we could be making ourselves redundant.
 
-## NAASBot
+## IAN
 
-NAASBot is the natural-language front door to everything above. Instead of knowing the right endpoint and the right JSON shape, you ask in plain English — *"is there a DNS record for `payments-stage-01`?"*, *"any tickets pending approval for me?"*, *"why can't this IP reach that VIP?"*, *"create a CNAME for `app.example.com` pointing at the staging VIP"* — and the bot figures out which tool to call, calls it, and writes back a sentence-shaped answer.
+IAN short for Infrastructure and networks is the natural-language network agent that fronts to everything above. Instead of knowing the right endpoint and the right JSON shape, you ask in plain English — *"is there a DNS record for `payments-stage-01`?"*, *"any tickets pending approval for me?"*, *"why can't this IP reach that VIP?"*, *"create a CNAME for `app.example.com` pointing at the staging VIP"* — and the bot figures out which tool to call, calls it, and writes back a sentence-shaped answer.
 
-Under the hood it's a Claude Sonnet 4.5 tool-use loop with around twenty-one tools wired up across every backend NAAS already integrates with — DNS, load balancer, firewall, ticketing, path analysis, the secure-access layer, the internal wiki, and email.
+Under the hood it's using claude LLM with around twenty-one tools wired up across every backend NAAS already integrates with — DNS, load balancer, firewall, ticketing, path analysis, the secure-access layer, the internal wiki, and email.
 
 A few choices worth flagging:
 
@@ -101,7 +101,7 @@ Honestly, a lot. The whole project ended up being a crash course in backend engi
 
 ## Where it's going next
 
-The next direction for the platform is **self-healing networks** — in addition to request-driven automation and incident-driven response, a system that notices problems and fixes them on its own. The natural starting point is **BGP**, since it's the layer that's both rich enough to detect drift (route withdrawals, unexpected paths, session flaps, prefix leaks) and dynamic enough to need active correction.
+The next direction for the platform is **self-healing networks** — in addition to request-driven automation and incident-driven response, a system that notices problems and fixes them on its own. The natural starting point is **BGP**, since it's the layer that's both rich enough to detect drift (route withdrawals, unexpected paths, session flaps, prefix leaks) and dynamic enough to need active correction. Additionally build new flows into IAN to analyze the latency or cpu alerts and make a decision to raise incident's only if it's a genuine problem or ignore if those alerts are just noise, finetuning alert space.
 
 The rough shape: stream BGP state off the edge routers, compare it against intent (what *should* be advertised, what the best path *should* be), auto-remediate the things we know how to fix safely, and escalate everything else to the network team with the full context already attached. Same posture NAAS already has for firewall rules and DNS, just applied to the control plane rather than the policy plane. Long road, but the building blocks — telemetry, intent capture, the workflow scaffolding, the chatbot for human handoff — are already here.
 
