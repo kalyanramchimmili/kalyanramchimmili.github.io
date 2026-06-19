@@ -83,7 +83,7 @@ The single highest-leverage thing this module does is the path-analysis check be
 
 ## IAN
 
-IAN short for Infrastructure and networks is the natural-language network agent that fronts to everything above. Instead of knowing the right endpoint and the right JSON shape, you ask in plain English — *"is there a DNS record for `payments-stage-01`?"*, *"any tickets pending approval for me?"*, *"why can't this IP reach that VIP?"*, *"create a CNAME for `app.example.com` pointing at the staging VIP"* — and the bot figures out which tool to call, calls it, and writes back a sentence-shaped answer.
+Meet IAN our L1 network agent short for Infrastructure and networks is the natural-language front door to everything above. Instead of knowing the right endpoint and the right JSON shape, you ask in plain English — *"is there a DNS record for `payments-stage-01`?"*, *"any tickets pending approval for me?"*, *"why can't this IP reach that VIP?"*, *"create a CNAME for `app.example.com` pointing at the staging VIP"* — and the bot figures out which tool to call, calls it, and writes back a sentence-shaped answer.
 
 Under the hood it's using claude LLM with around twenty-one tools wired up across every backend NAAS already integrates with — DNS, load balancer, firewall, ticketing, path analysis, the secure-access layer, the internal wiki, and email.
 
