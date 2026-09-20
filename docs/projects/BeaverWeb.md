@@ -34,7 +34,7 @@ No WSGI/ASGI compliance, no middleware chain, no type-hint validation, no chunke
 
 ## Documentation
 
-Official docs live in this same portfolio site — source in [`/documentation/beaverWeb/`](https://github.com/kalyanramchimmili/kalyanramchimmilli/tree/main/documentation/beaverWeb) of this repo, rendered at [kalyanramchimmili.github.io/documentation/beaverWeb/introduction](https://kalyanramchimmili.github.io/documentation/beaverWeb/introduction).
+Official docs live in this same portfolio site at [kalyanramchimmili.github.io/documentation/beaverWeb/introduction](https://kalyanramchimmili.github.io/documentation/beaverWeb/introduction).
 
 ## What I picked up
 
