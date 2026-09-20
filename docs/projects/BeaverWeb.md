@@ -1,5 +1,5 @@
 ---
-title: BeaverWeb
+title: BeaverWeb 🦫
 description: A tiny Python web framework I wrote from a raw socket up — v0.1, decorators, path params, Jinja2, no WSGI.
 tags: [Python, HTTP, Sockets, Jinja2, Web Framework, PyPI]
 ---
