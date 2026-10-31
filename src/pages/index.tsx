@@ -25,10 +25,8 @@ export default function Home(): ReactNode {
         <h2>Hello!</h2>
 
         <p>
-          I am a Network Engineer at <strong><a href="https://www.iggroup.com/">IG Group</a></strong>, currently
-          building <strong> Network as a Service (NaaS)</strong> platforms. My
-          work involves automating global infrastructure and developing
-          software-driven network solutions.
+          I am a Network Engineer at <strong><a href="https://www.iggroup.com/">IG Group</a></strong>,
+            building internal platforms that automate global network operations.
         </p>
 
         <p>
